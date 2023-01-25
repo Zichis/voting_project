@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ShareholderController;
+use App\Http\Controllers\VoteController;
 use App\Http\Controllers\VotingItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,6 @@ Route::middleware('auth:sanctum')->get('/voting-items', [VotingItemController::c
 Route::middleware('auth:sanctum')->post('/voting-items', [VotingItemController::class, 'store']);
 
 Route::middleware('auth:sanctum')->post('/shareholders', [ShareholderController::class, 'store']);
+
+Route::middleware('auth:sanctum')->post('/votes', [VoteController::class, 'store']);
+Route::middleware('auth:sanctum')->get('/votes', [VoteController::class, 'index']);
