@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\ShareholderController;
 use App\Http\Controllers\VotingItemController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +25,5 @@ Route::post('/login', [LoginController::class, 'login']);
 
 Route::middleware('auth:sanctum')->get('/voting-items', [VotingItemController::class, 'index']);
 Route::middleware('auth:sanctum')->post('/voting-items', [VotingItemController::class, 'store']);
+
+Route::middleware('auth:sanctum')->post('/shareholders', [ShareholderController::class, 'store']);
