@@ -43,6 +43,8 @@ class ShareholderController extends Controller
                 'password' => Hash::make($validated['password'])
             ]);
 
+            $user->assignRole('shareholder');
+
             if($request->has("units") && $request->has("company_id")) {
                 Share::create([
                     'user_id' => $user->id,
