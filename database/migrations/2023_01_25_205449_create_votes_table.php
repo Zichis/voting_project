@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('votes', function (Blueprint $table) {
             $table->id();
             $table->foreignId("item_id");
-            $table->bigInteger("yes");
-            $table->bigInteger("no");
+            $table->bigInteger("yes")->default(0);
+            $table->bigInteger("no")->default(0);
             $table->timestamps();
         });
     }
