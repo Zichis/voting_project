@@ -33,7 +33,7 @@ class VoteController extends Controller
     {
         $validated = $request->validate([
             "vote" => 'required',
-            "item_id" => 'required'
+            "item_id" => 'required|exists:voting_items,id'
         ]);
 
         DB::beginTransaction();
