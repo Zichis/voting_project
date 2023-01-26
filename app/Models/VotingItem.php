@@ -10,4 +10,9 @@ class VotingItem extends Model
     use HasFactory;
 
     protected $fillable = ["name"];
+
+    public function vote()
+    {
+        return $this->hasOne(Vote::class, 'item_id');
+    }
 }
