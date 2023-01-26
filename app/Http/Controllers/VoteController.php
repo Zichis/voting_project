@@ -54,14 +54,20 @@ class VoteController extends Controller
             }
             
             $numberOfVotes = Share::where("user_id", auth()->user()->id)->get()->sum('units');
-            $vote = Vote::updateOrCreate(
-                ['item_id' => $request->get('item_id')],
-                ['yes' => 0, 'no' => 0],
-            );
-            $vote->update([
-                'yes' => $request->get('vote') == "yes" ? $vote->yes + $numberOfVotes : $vote->yes,
-                'no' => $request->get('vote') == "no" ? $vote->no + $numberOfVotes : $vote->no
-            ]);
+            $vote = Vote::where('item_id', $request->get('item_id'))->first();
+
+            if (is_null($vote)) {
+                Vote::create([
+                    'item_id' => $request->get('item_id'),
+                    'yes' => $request->get('vote') == "yes" ? $numberOfVotes : 0,
+                    'no' => $request->get('vote') == "no" ? $numberOfVotes : 0,
+                ]);
+            } else {
+                $vote->update([
+                    'yes' => $request->get('vote') == "yes" ? $vote->yes + $numberOfVotes : $vote->yes,
+                    'no' => $request->get('vote') == "no" ? $vote->no + $numberOfVotes : $vote->no
+                ]);
+            }
 
             VoteLog::create([
                 'item_id' => $request->get('item_id'),
