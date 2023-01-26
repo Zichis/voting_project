@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\VoteResource;
 use App\Models\Share;
 use App\Models\Vote;
 use App\Models\VoteLog;
@@ -20,7 +21,7 @@ class VoteController extends Controller
      */
     public function index()
     {
-        return Vote::all();
+        return VoteResource::collection(Vote::all());
     }
 
     /**
